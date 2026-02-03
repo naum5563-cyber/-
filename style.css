@@ -1,0 +1,259 @@
+:root {
+  color-scheme: dark;
+  --bg: #0f1221;
+  --panel: #1b2038;
+  --accent: #7df9ff;
+  --accent-2: #ffbe0b;
+  --muted: #9aa4d1;
+  --danger: #ff5e5b;
+  --success: #00f5a0;
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #1a1f35, #0b0e1a 55%);
+  color: #eef1ff;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.app__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background: var(--panel);
+  padding: 20px 24px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.app__header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.app__header p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.app__actions {
+  display: flex;
+  gap: 12px;
+}
+
+button,
+select {
+  background: #252b47;
+  color: #f3f6ff;
+  border: 1px solid #30375b;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+button:hover,
+select:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(125, 249, 255, 0.15);
+}
+
+button.primary {
+  background: linear-gradient(135deg, #1f7aff, #39bdf9);
+  border: none;
+}
+
+.app__main {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) 320px;
+  gap: 24px;
+}
+
+.board {
+  position: relative;
+  background: #0b0e1a;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  background: #0d1020;
+  border: 1px solid #2a3157;
+}
+
+.overlay {
+  position: absolute;
+  inset: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(7, 9, 20, 0.75);
+  border-radius: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.overlay__card {
+  text-align: center;
+  background: #141a33;
+  padding: 24px 30px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.overlay__stats {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+.panel {
+  background: var(--panel);
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: var(--shadow);
+}
+
+.panel__section {
+  background: #161c33;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.panel__section h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stats .label {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.field select {
+  min-width: 160px;
+}
+
+.field.checkbox {
+  justify-content: flex-start;
+}
+
+.legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.dot.food { color: #ff5470; background: #ff5470; }
+.dot.golden { color: #ffd166; background: #ffd166; }
+.dot.slow { color: #4cc9f0; background: #4cc9f0; }
+.dot.shrink { color: #b5179e; background: #b5179e; }
+.dot.ghost { color: #80ffdb; background: #80ffdb; }
+
+.controls {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.controls button {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  font-size: 20px;
+}
+
+.controls > div {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .app__main {
+    grid-template-columns: 1fr;
+  }
+
+  .controls {
+    display: flex;
+  }
+}
+
+.theme-classic {
+  --bg: #101010;
+  --panel: #1c1c1c;
+  --accent: #9fe870;
+  --accent-2: #ffd166;
+  --muted: #bcbcbc;
+}
+
+.theme-forest {
+  --bg: #0c1f17;
+  --panel: #122a1f;
+  --accent: #74c69d;
+  --accent-2: #ffb703;
+  --muted: #b7d7c2;
+}
+
+.theme-classic body,
+.theme-forest body {
+  background: var(--bg);
+}
