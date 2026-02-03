@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Змейка — Ultimate Edition</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23131a33'/%3E%3Cpath d='M20 52h38c13 0 22-7 22-17S71 18 58 18H20v14h38c5 0 8 2 8 6s-3 7-8 7H20v14h30c7 0 11 3 11 8s-4 8-11 8H20v14h30c15 0 26-8 26-20s-9-19-22-20c10-3 16-10 16-19 0-12-10-20-24-20H20z' fill='%237df9ff'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app__header">
+      <div>
+        <h1>Змейка — Ultimate Edition</h1>
+        <p>Супер-проработанная версия: режимы, уровни, бонусы, скины и мобильные контролы.</p>
+      </div>
+      <div class="app__actions">
+        <button id="startBtn" class="primary">Старт</button>
+        <button id="pauseBtn">Пауза</button>
+        <button id="resetBtn">Сброс</button>
+      </div>
+    </header>
+
+    <main class="app__main">
+      <section class="board">
+        <canvas id="game" width="640" height="640"></canvas>
+        <div class="overlay" id="overlay">
+          <div class="overlay__card">
+            <h2 id="overlayTitle">Готовы?</h2>
+            <p id="overlayDesc">Нажмите «Старт» или пробел для начала.</p>
+            <div class="overlay__stats">
+              <span>Лучший счёт: <strong id="bestScore">0</strong></span>
+              <span>Режим: <strong id="bestMode">Classic</strong></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <div class="panel__section">
+          <h3>Панель статуса</h3>
+          <div class="stats">
+            <div>
+              <span class="label">Счёт</span>
+              <strong id="score">0</strong>
+            </div>
+            <div>
+              <span class="label">Комбо</span>
+              <strong id="combo">x1</strong>
+            </div>
+            <div>
+              <span class="label">Уровень</span>
+              <strong id="level">1</strong>
+            </div>
+            <div>
+              <span class="label">Скорость</span>
+              <strong id="speedLabel">1.0x</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel__section">
+          <h3>Настройки</h3>
+          <div class="field">
+            <label for="mode">Режим</label>
+            <select id="mode">
+              <option value="classic">Classic (стены смертельны)</option>
+              <option value="wrap">Wrap (телепорт через стену)</option>
+              <option value="obstacles">Obstacles (камни + стены)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="grid">Размер поля</label>
+            <select id="grid">
+              <option value="18">Маленький (18x18)</option>
+              <option value="22" selected>Средний (22x22)</option>
+              <option value="28">Большой (28x28)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="speed">Базовая скорость</label>
+            <select id="speed">
+              <option value="0.85">Медленно</option>
+              <option value="1" selected>Норма</option>
+              <option value="1.2">Быстро</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="theme">Тема</label>
+            <select id="theme">
+              <option value="neo" selected>Неон</option>
+              <option value="classic">Классика</option>
+              <option value="forest">Лес</option>
+            </select>
+          </div>
+          <div class="field checkbox">
+            <label>
+              <input type="checkbox" id="sound" checked />
+              Звук и вибрация
+            </label>
+          </div>
+          <div class="field checkbox">
+            <label>
+              <input type="checkbox" id="particles" checked />
+              Частицы
+            </label>
+          </div>
+        </div>
+
+        <div class="panel__section">
+          <h3>Бонусы</h3>
+          <ul class="legend">
+            <li><span class="dot food"></span>Яблоко: +1, комбо</li>
+            <li><span class="dot golden"></span>Золотое: +3, ускорение</li>
+            <li><span class="dot slow"></span>Снежинка: замедление</li>
+            <li><span class="dot shrink"></span>Перо: -2 сегмента</li>
+            <li><span class="dot ghost"></span>Призрак: проход через себя</li>
+          </ul>
+        </div>
+
+        <div class="panel__section">
+          <h3>Управление</h3>
+          <ul class="legend">
+            <li>Стрелки / WASD — движение</li>
+            <li>Пробел — пауза</li>
+            <li>Shift — ускорение рывком</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <section class="controls">
+      <button data-dir="up">▲</button>
+      <div>
+        <button data-dir="left">◀</button>
+        <button data-dir="down">▼</button>
+        <button data-dir="right">▶</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
